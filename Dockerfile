@@ -1,0 +1,23 @@
+FROM node:20-slim AS build
+
+# Install required packages: curl, bash, unzip
+RUN apt-get update && apt-get install -y curl bash unzip && rm -rf /var/lib/apt/lists/*
+
+# Install Bun
+RUN curl -fsSL https://bun.sh/install | bash
+
+# Set Bun in PATH
+ENV PATH="/root/.bun/bin:$PATH"
+
+# Set working directory
+WORKDIR /app
+
+# Copy files
+COPY . .
+
+# Install NestJS CLI (optional)
+RUN bun install -g @nestjs/cli
+
+# Install dependencies and build the app
+RUN bun install
+RUN bun run build
