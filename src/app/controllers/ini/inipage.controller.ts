@@ -1,9 +1,9 @@
 import { Controller, Get, Res } from '@nestjs/common';
 import { Response } from 'express';
-import { AppService } from './app.service';
-@Controller()
-export class AppController {
-  constructor(private readonly appService: AppService) {}
+import { IniAppService } from 'src/use-cases/ini/inipage-usecase.service';
+@Controller('ini')
+export class IniAppController {
+  constructor(private readonly appService: IniAppService) {}
 
   @Get()
   getHello(@Res() res: Response) {
