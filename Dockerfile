@@ -1,7 +1,7 @@
-FROM node:20-slim AS build
+FROM node:24-alpine AS build
 
 # Install required packages: curl, bash, unzip
-RUN apt-get update && apt-get install -y curl bash unzip && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache curl bash unzip
 
 # Install Bun
 RUN curl -fsSL https://bun.sh/install | bash
