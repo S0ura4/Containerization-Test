@@ -45,6 +45,7 @@
     "pg-query-stream": "^4.8.1",
     "reflect-metadata": "^0.1.13",
     "slugify": "^1.6.6",
+    "socket.io": "^4.8.1",
     "typeorm": "^0.3.17"
   },
   "devDependencies": {

@@ -8,6 +8,12 @@ export class IniAppController {
   @Get()
   getHello(@Res() res: Response) {
     res.setHeader('Content-Type', 'text/html');
-    res.send(this.appService.getHello());
+    res.send(this.appService.getIniPage());
+  }
+
+  @Get('chat')
+  getChatPage(@Res() res: Response) {
+    res.setHeader('Content-Type', 'text/html');
+    res.send(this.appService.getChatPage());
   }
 }
