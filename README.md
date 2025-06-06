@@ -34,14 +34,14 @@
 
 | Tool           | Icon                                                                                                               | Description                   |
 | -------------- | ------------------------------------------------------------------------------------------------------------------ | ----------------------------- |
-| Docker         | `<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="24"/>`          | Containerization platform     |
-| Docker Compose | `<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg" width="24"/>` | Multi-container orchestration |
-| Bun            | `<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bun/bun-original.svg" width="24"/>`                | Modern JavaScript runtime     |
-| Node.js        | `<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="24"/>`          | JavaScript runtime            |
-| Socket.io      | `<img src="https://cdn.simpleicons.org/socketdotio/010101/white" width="24"/>`                                   | Real-time communication       |
-| PostgreSQL     | `<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="24"/>`  | SQL database                  |
-| NGINX          | `<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" width="24"/>`            | HTTP reverse proxy            |
-| NestJS         | `<img src="https://nestjs.com/img/logo-small.svg" width="24"/>`                                                  | Backend framework             |
+| Docker         | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="24"/>             | Containerization platform     |
+| Docker Compose | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg" width="24"/> | Multi-container orchestration |
+| Bun            | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bun/bun-original.svg" width="24"/>                | Modern JavaScript runtime     |
+| Node.js        | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="24"/>          | JavaScript runtime            |
+| Socket.io      | <img src="https://cdn.simpleicons.org/socketdotio/010101/white" width="24"/>                                   | Real-time communication       |
+| PostgreSQL     | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="24"/>  | SQL database                  |
+| NGINX          | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" width="24"/>            | HTTP reverse proxy            |
+| NestJS         | <img src="https://nestjs.com/img/logo-small.svg" width="24"/>                                                  | Backend framework             |
 
 ---
 
