@@ -6,13 +6,40 @@ export function getChatPage() {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chat Page</title>
-  <!-- Scripts will be moved to the end of the body -->
   <style>
-    /* ... Your CSS is perfect, no changes needed ... */
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
     body { background-color: #121212; color: #e0e0e0; display: flex; flex-direction: column; height: 100vh; justify-content: center; align-items: center; }
     #chat-container { display: flex; flex-direction: column; width: 100%; max-width: 600px; height: 90vh; border: 1px solid #333; border-radius: 10px; overflow: hidden; background-color: #1e1e1e; box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); position: relative; }
-    #messages { flex: 1; list-style: none; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+    
+    /* FIXED: Seamless scrollbar styling */
+    #messages {
+      flex: 1;
+      list-style: none;
+      padding: 20px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      /* For Webkit browsers like Chrome, Safari */
+      &::-webkit-scrollbar {
+        width: 8px;
+      }
+      &::-webkit-scrollbar-track {
+        background: #1e1e1e;
+      }
+      &::-webkit-scrollbar-thumb {
+        background-color: #4f4f4f;
+        border-radius: 10px;
+        border: 2px solid #1e1e1e;
+      }
+      &::-webkit-scrollbar-thumb:hover {
+        background-color: #6a6a6a;
+      }
+      /* For Firefox */
+      scrollbar-width: thin;
+      scrollbar-color: #4f4f4f #1e1e1e;
+    }
+
     #messages li { background: #2a2a2a; padding: 10px 15px; border-radius: 6px; max-width: 80%; word-wrap: break-word; animation: fadeIn 0.3s ease-in-out; }
     #messages li.own-message { background: #005c4b; align-self: flex-end; }
     #messages li img { max-width: 200px; border-radius: 4px; margin-top: 5px; display: block; }
@@ -43,13 +70,10 @@ export function getChatPage() {
     </form>
   </div>
 
-  <!-- FIXED: All scripts are moved to the end of the body to prevent race conditions. -->
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@4.6.4/dist/index.umd.js"></script>
 
   <script>
-    // FIXED: Removed the 'DOMContentLoaded' wrapper as it's no longer needed.
-    // The IIFE (Immediately Invoked Function Expression) is still good practice.
     (() => {
       const chatSocket = io('/chat');
       const userSocket = io('/user');
@@ -62,11 +86,10 @@ export function getChatPage() {
       const emojiBtn = document.getElementById('emoji-btn');
 
       // --- Emoji Picker Initialization ---
-      // This will now work because the script above has already loaded and executed.
       try {
         const picker = new EmojiButton();
-        picker.on('emoji', emoji => {
-          input.value += emoji;
+        picker.on('emoji', selection => {
+          input.value += selection.emoji;
           input.focus();
         });
         emojiBtn.addEventListener('click', () => picker.togglePicker(emojiBtn));
@@ -74,6 +97,11 @@ export function getChatPage() {
         console.error('Failed to initialize Emoji picker:', error);
         emojiBtn.disabled = true;
         emojiBtn.title = 'Emoji picker failed to load';
+      }
+      
+      // FIXED: Helper function for seamless scrolling
+      function scrollToBottom() {
+        messages.scroll({ top: messages.scrollHeight, behavior: 'smooth' });
       }
 
       // --- Helper Functions and Event Listeners ---
@@ -92,7 +120,7 @@ export function getChatPage() {
           item.classList.add('own-message');
         }
         messages.appendChild(item);
-        messages.scrollTop = messages.scrollHeight;
+        scrollToBottom(); // Use the new seamless scroll function
       }
 
       form.addEventListener('submit', (e) => {
@@ -156,7 +184,7 @@ export function getChatPage() {
           li.className = 'typing-indicator dot-animate';
           li.textContent = 'Someone is typing';
           messages.appendChild(li);
-          messages.scrollTop = messages.scrollHeight;
+          scrollToBottom(); // Also scroll smoothly for the typing indicator
         }
       }
 
