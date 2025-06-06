@@ -3,11 +3,11 @@ export function getChatPage() {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Chat Page</title>
-  <script src="/static/js/chat.js" defer></script>
   <script src="/socket.io/socket.io.js"></script>
+  <script src="/static/js/chat.js" defer></script>
   <style>
     * {
       box-sizing: border-box;
@@ -37,6 +37,7 @@ export function getChatPage() {
       overflow: hidden;
       background-color: #1e1e1e;
       box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      position: relative;
     }
 
     #messages {
@@ -115,10 +116,31 @@ export function getChatPage() {
     #chat-form button:hover {
       background: #505050;
     }
+
+    #toast-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      opacity: 0.9;
+      animation: fadeIn 0.3s ease-in-out;
+    }
   </style>
 </head>
 <body>
   <div id="chat-container">
+    <div id="toast-container"></div>
     <ul id="messages"></ul>
     <form id="chat-form">
       <input id="chat-input" autocomplete="off" placeholder="Type a message..." />
@@ -127,19 +149,18 @@ export function getChatPage() {
   </div>
 
   <script>
-    const socket = io();
+    const chatSocket = io('/chat');
+    const userSocket = io('/user');
+
     const form = document.getElementById('chat-form');
     const input = document.getElementById('chat-input');
     const messages = document.getElementById('messages');
-
-    socket.on('connect', () => {
-      console.log('Connected to the server');
-    });
+    const toastContainer = document.getElementById('toast-container');
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
       if (input.value) {
-        socket.emit('chat message', input.value);
+        chatSocket.emit('chat message', input.value);
         input.value = '';
         removeTypingIndicator();
       }
@@ -151,7 +172,7 @@ export function getChatPage() {
     input.addEventListener('input', () => {
       if (!typing) {
         typing = true;
-        socket.emit('typing');
+        chatSocket.emit('typing', 'User');
         timeout = setTimeout(stopTyping, 1000);
       } else {
         clearTimeout(timeout);
@@ -161,7 +182,7 @@ export function getChatPage() {
 
     function stopTyping() {
       typing = false;
-      socket.emit('stop typing');
+      chatSocket.emit('stop typing', 'User');
     }
 
     function addTypingIndicator() {
@@ -180,15 +201,15 @@ export function getChatPage() {
       if (typingMsg) typingMsg.remove();
     }
 
-    socket.on('typing', () => {
-      addTypingIndicator();
-    });
+    function showToast(message) {
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = message;
+      toastContainer.appendChild(toast);
+      setTimeout(() => toast.remove(), 4000);
+    }
 
-    socket.on('stop typing', () => {
-      removeTypingIndicator();
-    });
-
-    socket.on('chat message', (msg) => {
+    chatSocket.on('chat message', (msg) => {
       removeTypingIndicator();
       const item = document.createElement('li');
       item.textContent = msg;
@@ -196,8 +217,24 @@ export function getChatPage() {
       messages.scrollTop = messages.scrollHeight;
     });
 
-    socket.on('disconnect', () => {
-      console.log('Disconnected from the server');
+    chatSocket.on('typing', ({ username }) => {
+      addTypingIndicator();
+    });
+
+    chatSocket.on('stop typing', ({ username }) => {
+      removeTypingIndicator();
+    });
+
+    userSocket.on('connection', () => {
+      showToast('User connected to user namespace');
+    });
+
+    userSocket.on('disconnect', () => {
+      showToast('User disconnected from user namespace');
+    });
+
+    userSocket.on('user event response', (data) => {
+      showToast('User: ' + data.type);
     });
   </script>
 </body>

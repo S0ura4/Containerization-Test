@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Server } from 'socket.io';
+import { NameSpaceConstants } from 'src/common/socket-constants/namespace.constant';
 
 @Injectable()
 export class SocketIoService {
@@ -8,26 +9,28 @@ export class SocketIoService {
   public initSocketIo(server: any) {
     const io = new Server(server);
 
-    io.on('connection', (socket) => {
-      console.log('A user connected:', socket.id);
-
+    // CHAT Namespace
+    io.of(NameSpaceConstants.CHAT).on('connection', (socket) => {
       socket.on('chat message', (msg) => {
-        console.log('Message received:', msg);
-        io.emit('chat message', msg);
+        io.of(NameSpaceConstants.CHAT).emit('chat message', msg);
       });
 
       socket.on('typing', (username) => {
-        console.log(`${username} is typing...`);
         socket.broadcast.emit('typing', { username });
       });
 
       socket.on('stop typing', (username) => {
-        console.log(`${username} stopped typing.`);
         socket.broadcast.emit('stop typing', { username });
       });
 
+      socket.on('disconnect', () => {});
+    });
+
+    // USER Namespace
+    io.of(NameSpaceConstants.USER).on('connection', (socket) => {
+      socket.broadcast.emit('user event response', { type: 'joined', id: socket.id });
       socket.on('disconnect', () => {
-        console.log('User disconnected:', socket.id);
+        socket.broadcast.emit('user event response', { type: 'left', id: socket.id });
       });
     });
 
