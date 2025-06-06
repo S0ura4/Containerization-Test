@@ -1,54 +1,61 @@
 # Containerization-Test
 
-[![Docker](https://img.shields.io/badge/Docker-blue?logo=docker)](https://www.docker.com/)
-[![Docker Compose](https://img.shields.io/badge/Docker%20Compose-blue?logo=docker)](https://docs.docker.com/compose/)
-[![Bun](https://img.shields.io/badge/Bun-black?logo=bun)](https://bun.sh/)
-[![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Socket.io](https://img.shields.io/badge/Socket.io-black?logo=socket.io)](https://socket.io/)
-[![Postgres](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
-[![NGINX](https://img.shields.io/badge/NGINX-009639?logo=nginx&logoColor=white)](https://nginx.org/)
-[![NestJS](https://img.shields.io/badge/NestJS-E0234E?logo=nestjs&logoColor=white)](https://nestjs.com/)
+<p align="center">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg" width="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bun/bun-original.svg" width="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="40"/>
+  <img src="https://cdn.simpleicons.org/socketdotio/010101/white" width="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="40"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" width="40"/>
+  <img src="https://nestjs.com/img/logo-small.svg" width="40"/>
+</p>
+
+<p align="center">
+  <b>Modern Full-Stack Containerized Template</b><br/>
+  Orchestrated with Docker & Docker Compose
+</p>
 
 ---
 
 ## 🚀 Overview
 
-**Containerization-Test** is a comprehensive template for running a modern full-stack application stack in Docker. It demonstrates the use of:
-- Bun & Node.js for server-side JavaScript/TypeScript
-- NestJS as a backend framework
-- Socket.io for real-time communication
-- PostgreSQL as a database
-- NGINX as a reverse proxy
+**Containerization-Test** is a full-stack containerized boilerplate that uses:
 
-Everything is orchestrated with Docker and Docker Compose for a seamless local development experience.
+- **Bun** & **Node.js** for server-side JS
+- **NestJS** as the backend framework
+- **Socket.io** for real-time comms
+- **PostgreSQL** as a database
+- **NGINX** as a reverse proxy
+- **Docker** + **Docker Compose** for orchestration
 
 ---
 
-## 🛠️ Tools Used
+## 🧰 Tools Used
 
-| Tool         | Description                                  |
-|--------------|----------------------------------------------|
-| ![Docker](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg) | Containerization platform |
-| ![Docker Compose](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg) | Multi-container orchestration |
-| ![Bun](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bun/bun-original.svg) | Modern JavaScript runtime |
-| ![Node.js](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg) | JavaScript runtime |
-| ![Socket.io](https://cdn.simpleicons.org/socketdotio/010101/white) | Real-time communication |
-| ![Postgres](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg) | SQL database |
-| ![NGINX](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg) | HTTP reverse proxy |
-| ![NestJS](https://nestjs.com/img/logo-small.svg) | Backend framework |
+| Tool             | Icon                                                                 | Description                    |
+|------------------|----------------------------------------------------------------------|--------------------------------|
+| Docker           | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" width="24"/> | Containerization platform      |
+| Docker Compose   | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg" width="24"/> | Multi-container orchestration |
+| Bun              | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bun/bun-original.svg" width="24"/> | Modern JavaScript runtime      |
+| Node.js          | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="24"/> | JavaScript runtime             |
+| Socket.io        | <img src="https://cdn.simpleicons.org/socketdotio/010101/white" width="24"/> | Real-time communication       |
+| PostgreSQL       | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" width="24"/> | SQL database                   |
+| NGINX            | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg" width="24"/> | HTTP reverse proxy             |
+| NestJS           | <img src="https://nestjs.com/img/logo-small.svg" width="24"/>        | Backend framework              |
 
 ---
 
 ## ⚡ Quick Start
 
-> **Note:**  
-> _You do **not** need to run `bun install` or `npm install` manually. All dependencies and build steps are handled inside Docker containers. The only requirements on your machine are Docker and Docker Compose._
+> 📝 **Note:** No need to run `bun install` or `npm install`. Docker handles everything.
 
-### 1. Clone the Repository
+### 1. Clone the Repo
 
 ```bash
 git clone https://github.com/S0ura4/Containerization-Test.git
 cd Containerization-Test
+
 ```
 
 ### 2. Copy & Edit Environment Variables
