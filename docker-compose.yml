@@ -9,7 +9,7 @@ services:
       - .env
     restart: unless-stopped
     volumes:
-      - .:/app/src
+      - .:/app
     command: bun run start:dev
     environment:
       - NODE_ENV=development
