@@ -1,90 +1,250 @@
+Of course! Here is a professional and "good-looking" README file, tailored specifically to your project's description. It explains the architecture, the technologies used, and provides clear instructions for anyone (including your future self) to get it running.
+
+Containerization Test: NestJS, Postgres, Nginx & Socket.IO
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
+<img src="https://raw.githubusercontent.com/docker/docker.github.io/master/public/images/logos/docker-symbol-blue.svg" width="120" alt="Docker Logo" />
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
+<p align="center">
+A personal project to explore and demonstrate a fully containerized, scalable, and real-time web application stack.
 </p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+<p align="center">
+<a href="#"><img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS"></a>
+<a href="#"><img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL"></a>
+<a href="#"><img src="https://img.shields.io/badge/TypeORM-FF471A?style=for-the-badge" alt="TypeORM"></a>
+<a href="#"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"></a>
+<a href="#"><img src="https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white" alt="Nginx"></a>
+<a href="#"><img src="https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socket.io&logoColor=white" alt="Socket.io"></a>
+</p>
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+📖 Description
 
-## Project setup
+This repository is a hands-on test case for building a modern, robust backend system. The primary goal is to combine several powerful technologies into a single, cohesive, and scalable application orchestrated with Docker Compose.
 
-```bash
-$ npm install
-```
+The project features:
 
-## Compile and run the project
+A NestJS backend API providing a structured and scalable foundation.
 
-```bash
-# development
-$ npm run start
+PostgreSQL as the relational database, managed with TypeORM.
 
-# watch mode
-$ npm run start:dev
+Nginx acting as a reverse proxy and load balancer to distribute traffic between multiple NestJS instances.
 
-# production mode
-$ npm run start:prod
-```
+A real-time chat service built with Socket.IO.
 
-## Run tests
+Complete containerization using Docker and Docker Compose for easy setup, deployment, and scalability.
 
-```bash
-# unit tests
-$ npm run test
+🏛️ Architecture Diagram
 
-# e2e tests
-$ npm run test:e2e
+The application is orchestrated by Docker Compose. All incoming requests are routed through the Nginx container, which then load-balances the traffic to the available NestJS application instances. The NestJS applications communicate with the shared PostgreSQL database.
 
-# test coverage
-$ npm run test:cov
-```
+graph TD
+    subgraph "Docker Environment"
+        subgraph "Client (Browser/App)"
+            direction LR
+            User_HTTP[HTTP/API Requests]
+            User_WS[WebSocket Connection]
+        end
 
-## Resources
+        subgraph "Nginx Reverse Proxy & Load Balancer"
+            Nginx[fa:fa-server Nginx<br>localhost:8080]
+        end
 
-Check out a few resources that may come in handy when working with NestJS:
+        subgraph "Scalable Backend"
+            direction LR
+            Nest1[fa:fa-cube NestJS App 1<br>(with Socket.IO)]
+            Nest2[fa:fa-cube NestJS App 2<br>(with Socket.IO)]
+        end
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+        subgraph "Database"
+            Postgres[fa:fa-database PostgreSQL]
+        end
+    end
 
-## Support
+    User_HTTP -- " " --> Nginx
+    User_WS -- " " --> Nginx
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+    Nginx -- "Load Balances" --> Nest1
+    Nginx -- "Load Balances" --> Nest2
 
-## Stay in touch
+    Nest1 -- "CRUD & Chat" --> Postgres
+    Nest2 -- "CRUD & Chat" --> Postgres
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+✨ Features
 
-## License
+Backend API: A modular and extensible API built with NestJS.
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
-# Containerization-Test
-# Containerization-Test
-# Containerization-Test
-# Containerization-Test
+Database Integration: Robust database persistence using PostgreSQL and the TypeORM ORM.
+
+Containerization: All services (app, db, proxy) are containerized with Docker for consistency across all environments.
+
+Scalability: Nginx is configured to load balance across multiple instances of the NestJS application, demonstrating a horizontally scalable architecture.
+
+Real-time Communication: A basic chat server implemented with Socket.IO, accessible through the Nginx proxy.
+
+Developer Experience: One-command setup using Docker Compose.
+
+🛠️ Technology Stack
+
+Backend: NestJS
+
+Database: PostgreSQL
+
+ORM: TypeORM
+
+Real-time: Socket.IO
+
+Web Server / Proxy: Nginx
+
+Containerization: Docker, Docker Compose
+
+🚀 Getting Started
+
+Follow these instructions to get the project up and running on your local machine.
+
+Prerequisites
+
+You must have the following installed:
+
+Docker
+
+Docker Compose
+
+Installation & Setup
+
+Clone the repository:
+
+git clone <your-repository-url>
+cd containerization-test
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Bash
+IGNORE_WHEN_COPYING_END
+
+Create an environment file:
+Copy the example environment file to create your own local configuration.
+
+cp .env.example .env
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Bash
+IGNORE_WHEN_COPYING_END
+
+Configure your environment variables:
+Open the newly created .env file and fill in the required values. At a minimum, you should set a strong password for POSTGRES_PASSWORD.
+
+# .env
+
+# PostgreSQL Configuration
+POSTGRES_USER=myuser
+POSTGRES_PASSWORD=your_strong_password_here
+POSTGRES_DB=mydb
+DB_HOST=postgres_db
+DB_PORT=5432
+
+# NestJS Application Port (internal to Docker)
+APP_PORT=3000
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Ini
+IGNORE_WHEN_COPYING_END
+
+Build and run the containers:
+This single command will build the images for your services (if they don't exist) and start all containers in detached mode.
+
+docker-compose up --build -d
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Bash
+IGNORE_WHEN_COPYING_END
+
+--build: Forces a rebuild of the Docker images. Useful on the first run or after code changes.
+
+-d: Runs the containers in the background (detached mode).
+
+The application is now running!
+
+🕹️ Usage
+
+Once the containers are running, you can interact with the system:
+
+API Access: The API is accessible through the Nginx reverse proxy at http://localhost:8080.
+
+Chat Socket: Connect your Socket.IO client to ws://localhost:8080. The Nginx proxy will handle the WebSocket upgrade and forward the connection to one of the NestJS instances.
+
+Example Socket.IO Client (HTML/JS)
+
+You can use this simple HTML file to test the chat connection.
+
+<!-- test-chat.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Socket.IO Test</title>
+</head>
+<body>
+    <h1>Socket.IO Chat Test</h1>
+    <ul id="messages"></ul>
+    <form id="form" action="">
+        <input id="input" autocomplete="off" /><button>Send</button>
+    </form>
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script>
+        const socket = io("ws://localhost:8080");
+
+        const form = document.getElementById('form');
+        const input = document.getElementById('input');
+        const messages = document.getElementById('messages');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (input.value) {
+                // Example: emit a 'chatMessage' event
+                socket.emit('chatMessage', input.value);
+                input.value = '';
+            }
+        });
+
+        // Example: listen for 'chatMessage' events from server
+        socket.on('chatMessage', (msg) => {
+            const item = document.createElement('li');
+            item.textContent = msg;
+            messages.appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+
+        socket.on('connect', () => {
+            console.log('Connected to server! Socket ID:', socket.id);
+        });
+    </script>
+</body>
+</html>
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+Html
+IGNORE_WHEN_COPYING_END
+⚙️ Project Structure
+/
+├── backend/         # NestJS application source code
+├── nginx/           # Nginx configuration files
+├── .env.example     # Environment variable template
+├── docker-compose.yml # Docker orchestration file for all services
+└── README.md        # You are here!
+IGNORE_WHEN_COPYING_START
+content_copy
+download
+Use code with caution.
+IGNORE_WHEN_COPYING_END
+📜 License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
