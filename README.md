@@ -1,244 +1,132 @@
-Containerization Test: NestJS, Postgres, Nginx & Socket.IO
-<p align="center">
-<img src="https://img.icons8.com/?size=100&id=bf6MKm9Uf7uu&format=png&color=000000" width="120" alt="Docker Logo" />
-</p>
+# Containerization-Test
 
-<p align="center">
-A personal project to explore and demonstrate a fully containerized, scalable, and real-time web application stack.
-</p>
+[![Docker](https://img.shields.io/badge/Docker-blue?logo=docker)](https://www.docker.com/)
+[![Docker Compose](https://img.shields.io/badge/Docker%20Compose-blue?logo=docker)](https://docs.docker.com/compose/)
+[![Bun](https://img.shields.io/badge/Bun-black?logo=bun)](https://bun.sh/)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Socket.io](https://img.shields.io/badge/Socket.io-black?logo=socket.io)](https://socket.io/)
+[![Postgres](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org/)
+[![NGINX](https://img.shields.io/badge/NGINX-009639?logo=nginx&logoColor=white)](https://nginx.org/)
+[![NestJS](https://img.shields.io/badge/NestJS-E0234E?logo=nestjs&logoColor=white)](https://nestjs.com/)
 
-<p align="center">
-<a href="#"><img src="https://img.shields.io/badge/NestJS-E0234E?style=for-the-badge&logo=nestjs&logoColor=white" alt="NestJS"></a>
-<a href="#"><img src="https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSQL"></a>
-<a href="#"><img src="https://img.shields.io/badge/TypeORM-FF471A?style=for-the-badge" alt="TypeORM"></a>
-<a href="#"><img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white" alt="Docker"></a>
-<a href="#"><img src="https://img.shields.io/badge/Nginx-009639?style=for-the-badge&logo=nginx&logoColor=white" alt="Nginx"></a>
-<a href="#"><img src="https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socket.io&logoColor=white" alt="Socket.io"></a>
-</p>
+---
 
-📖 Description
+## 🚀 Overview
 
-This repository is a hands-on test case for building a modern, robust backend system. The primary goal is to combine several powerful technologies into a single, cohesive, and scalable application orchestrated with Docker Compose.
+**Containerization-Test** is a comprehensive template for running a modern full-stack application stack in Docker. It demonstrates the use of:
+- Bun & Node.js for server-side JavaScript/TypeScript
+- NestJS as a backend framework
+- Socket.io for real-time communication
+- PostgreSQL as a database
+- NGINX as a reverse proxy
 
-The project features:
+Everything is orchestrated with Docker and Docker Compose for a seamless local development experience.
 
-A NestJS backend API providing a structured and scalable foundation.
+---
 
-PostgreSQL as the relational database, managed with TypeORM.
+## 🛠️ Tools Used
 
-Nginx acting as a reverse proxy and load balancer to distribute traffic between multiple NestJS instances.
+| Tool         | Description                                  |
+|--------------|----------------------------------------------|
+| ![Docker](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg) | Containerization platform |
+| ![Docker Compose](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original-wordmark.svg) | Multi-container orchestration |
+| ![Bun](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bun/bun-original.svg) | Modern JavaScript runtime |
+| ![Node.js](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg) | JavaScript runtime |
+| ![Socket.io](https://cdn.simpleicons.org/socketdotio/010101/white) | Real-time communication |
+| ![Postgres](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg) | SQL database |
+| ![NGINX](https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg) | HTTP reverse proxy |
+| ![NestJS](https://nestjs.com/img/logo-small.svg) | Backend framework |
 
-A real-time chat service built with Socket.IO.
+---
 
-Complete containerization using Docker and Docker Compose for easy setup, deployment, and scalability.
+## ⚡ Quick Start
 
-🏛️ Architecture Diagram
+> **Note:**  
+> _You do **not** need to run `bun install` or `npm install` manually. All dependencies and build steps are handled inside Docker containers. The only requirements on your machine are Docker and Docker Compose._
 
-The application is orchestrated by Docker Compose. All incoming requests are routed through the Nginx container, which then load-balances the traffic to the available NestJS application instances. The NestJS applications communicate with the shared PostgreSQL database.
+### 1. Clone the Repository
 
-graph TD
-    subgraph "Docker Environment"
-        subgraph "Client (Browser/App)"
-            direction LR
-            User_HTTP[HTTP/API Requests]
-            User_WS[WebSocket Connection]
-        end
+```bash
+git clone https://github.com/S0ura4/Containerization-Test.git
+cd Containerization-Test
+```
 
-        subgraph "Nginx Reverse Proxy & Load Balancer"
-            Nginx[fa:fa-server Nginx<br>localhost:8080]
-        end
+### 2. Copy & Edit Environment Variables
 
-        subgraph "Scalable Backend"
-            direction LR
-            Nest1[fa:fa-cube NestJS App 1<br>(with Socket.IO)]
-            Nest2[fa:fa-cube NestJS App 2<br>(with Socket.IO)]
-        end
+Copy the example environment file and edit as needed:
+```bash
+cp example.env .env
+```
+Update any secrets or configuration in `.env` before running the stack.
 
-        subgraph "Database"
-            Postgres[fa:fa-database PostgreSQL]
-        end
-    end
+### 3. Run the Project
 
-    User_HTTP -- " " --> Nginx
-    User_WS -- " " --> Nginx
+```bash
+docker compose up --build
+```
+This command will:
+- Build all relevant images
+- Start all services (backend, database, nginx, etc.)
+- Automatically install dependencies and launch the app
 
-    Nginx -- "Load Balances" --> Nest1
-    Nginx -- "Load Balances" --> Nest2
+### 4. Accessing the Application
 
-    Nest1 -- "CRUD & Chat" --> Postgres
-    Nest2 -- "CRUD & Chat" --> Postgres
+- The main backend/API will be available at: `http://localhost:3000`
+- The frontend (if included) and other services will be accessible at the ports specified in `docker-compose.yml` and `nginx.conf`.
 
-✨ Features
+### 5. Stopping the Project
 
-Backend API: A modular and extensible API built with NestJS.
+To shut down all containers:
+```bash
+docker compose down
+```
 
-Database Integration: Robust database persistence using PostgreSQL and the TypeORM ORM.
+---
 
-Containerization: All services (app, db, proxy) are containerized with Docker for consistency across all environments.
+## 📁 Key Files & Structure
 
-Scalability: Nginx is configured to load balance across multiple instances of the NestJS application, demonstrating a horizontally scalable architecture.
+```text
+Containerization-Test/
+├── Dockerfile             # Application build & runtime definition
+├── docker-compose.yml     # Service orchestration and dependencies
+├── example.env            # Example environment variable definitions
+├── nginx.conf             # NGINX reverse proxy configuration
+├── src/                   # Application source code
+└── ...
+```
 
-Real-time Communication: A basic chat server implemented with Socket.IO, accessible through the Nginx proxy.
+---
 
-Developer Experience: One-command setup using Docker Compose.
+## 📝 Notes
 
-🛠️ Technology Stack
+- **No manual local installation needed!**  
+  All dependencies are installed in the containers when you run Docker Compose.
+- **Main files to edit for configuration:**  
+  - `Dockerfile`
+  - `docker-compose.yml`
+  - `.env` (copied from `example.env`)
+  - `nginx.conf`
 
-Backend: NestJS
+---
 
-Database: PostgreSQL
+## 🤝 Contributing
 
-ORM: TypeORM
+Pull requests, issues, and suggestions are welcome!
 
-Real-time: Socket.IO
+---
 
-Web Server / Proxy: Nginx
+## 📄 License
 
-Containerization: Docker, Docker Compose
+This project is licensed under the [MIT License](LICENSE).
 
-🚀 Getting Started
+---
 
-Follow these instructions to get the project up and running on your local machine.
+## 🔗 References
 
-Prerequisites
-
-You must have the following installed:
-
-Docker
-
-Docker Compose
-
-Installation & Setup
-
-Clone the repository:
-
-git clone <your-repository-url>
-cd containerization-test
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Bash
-IGNORE_WHEN_COPYING_END
-
-Create an environment file:
-Copy the example environment file to create your own local configuration.
-
-cp .env.example .env
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Bash
-IGNORE_WHEN_COPYING_END
-
-Configure your environment variables:
-Open the newly created .env file and fill in the required values. At a minimum, you should set a strong password for POSTGRES_PASSWORD.
-
-# .env
-
-# PostgreSQL Configuration
-POSTGRES_USER=myuser
-POSTGRES_PASSWORD=your_strong_password_here
-POSTGRES_DB=mydb
-DB_HOST=postgres_db
-DB_PORT=5432
-
-# NestJS Application Port (internal to Docker)
-APP_PORT=3000
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Ini
-IGNORE_WHEN_COPYING_END
-
-Build and run the containers:
-This single command will build the images for your services (if they don't exist) and start all containers in detached mode.
-
-docker-compose up --build -d
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Bash
-IGNORE_WHEN_COPYING_END
-
---build: Forces a rebuild of the Docker images. Useful on the first run or after code changes.
-
--d: Runs the containers in the background (detached mode).
-
-The application is now running!
-
-🕹️ Usage
-
-Once the containers are running, you can interact with the system:
-
-API Access: The API is accessible through the Nginx reverse proxy at http://localhost:8080.
-
-Chat Socket: Connect your Socket.IO client to ws://localhost:8080. The Nginx proxy will handle the WebSocket upgrade and forward the connection to one of the NestJS instances.
-
-Example Socket.IO Client (HTML/JS)
-
-You can use this simple HTML file to test the chat connection.
-
-<!-- test-chat.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Socket.IO Test</title>
-</head>
-<body>
-    <h1>Socket.IO Chat Test</h1>
-    <ul id="messages"></ul>
-    <form id="form" action="">
-        <input id="input" autocomplete="off" /><button>Send</button>
-    </form>
-    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
-    <script>
-        const socket = io("ws://localhost:8080");
-
-        const form = document.getElementById('form');
-        const input = document.getElementById('input');
-        const messages = document.getElementById('messages');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            if (input.value) {
-                // Example: emit a 'chatMessage' event
-                socket.emit('chatMessage', input.value);
-                input.value = '';
-            }
-        });
-
-        // Example: listen for 'chatMessage' events from server
-        socket.on('chatMessage', (msg) => {
-            const item = document.createElement('li');
-            item.textContent = msg;
-            messages.appendChild(item);
-            window.scrollTo(0, document.body.scrollHeight);
-        });
-
-        socket.on('connect', () => {
-            console.log('Connected to server! Socket ID:', socket.id);
-        });
-    </script>
-</body>
-</html>
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-Html
-IGNORE_WHEN_COPYING_END
-⚙️ Project Structure
-/
-├── backend/         # NestJS application source code
-├── nginx/           # Nginx configuration files
-├── .env.example     # Environment variable template
-├── docker-compose.yml # Docker orchestration file for all services
-└── README.md        # You are here!
-
-📜 License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
+- [Docker Documentation](https://docs.docker.com/)
+- [Docker Compose Docs](https://docs.docker.com/compose/)
+- [Bun](https://bun.sh/)
+- [NestJS](https://nestjs.com/)
+- [Socket.io](https://socket.io/)
+- [Postgres](https://www.postgresql.org/)
+- [NGINX](https://nginx.org/)
