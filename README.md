@@ -2,7 +2,7 @@ Of course! Here is a professional and "good-looking" README file, tailored speci
 
 Containerization Test: NestJS, Postgres, Nginx & Socket.IO
 <p align="center">
-<img src="https://raw.githubusercontent.com/docker/docker.github.io/master/public/images/logos/docker-symbol-blue.svg" width="120" alt="Docker Logo" />
+<img src="[https://raw.githubusercontent.com/docker/docker.github.io/master/public/images/logos/docker-symbol-blue.svg](https://imgs.search.brave.com/9Lh4wGI1rXlQxJ9WAhD5TCxeQoiUkM0WqGxRXE1QMZ8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZG9ja2VyLmNvbS9h/cHAvdXBsb2Fkcy8y/MDIzLzA4L2xvZ28t/Z3VpZGUtbG9nb3Mt/MS5zdmc)" width="120" alt="Docker Logo" />
 </p>
 
 <p align="center">
@@ -240,11 +240,7 @@ IGNORE_WHEN_COPYING_END
 ├── .env.example     # Environment variable template
 ├── docker-compose.yml # Docker orchestration file for all services
 └── README.md        # You are here!
-IGNORE_WHEN_COPYING_START
-content_copy
-download
-Use code with caution.
-IGNORE_WHEN_COPYING_END
+
 📜 License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
